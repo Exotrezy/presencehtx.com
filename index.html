@@ -38,28 +38,8 @@ body{
 #cur.hov{width:52px;height:52px;background:var(--coral);border-radius:4px;mix-blend-mode:normal;}
 #cur.lnk{width:20px;height:20px;background:var(--ink);}
 
-/* loader */
-#loader{position:fixed;inset:0;background:var(--ink);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:clip-path .9s cubic-bezier(.77,0,.18,1);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}
-#loader.out{clip-path:polygon(0 0,100% 0,100% 0,0 0);pointer-events:none;}
-.tbox{width:min(460px,88vw);background:#0a0a08;border:1px solid #1c1c14;border-radius:8px;overflow:hidden;font-family:var(--mono);font-size:12px;}
-.tbar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:#111109;border-bottom:1px solid #181810;}
-.tdot{width:10px;height:10px;border-radius:50%;}
-.tdot.r{background:#3a1a10}.tdot.y{background:#3a2e10}.tdot.g{background:#123a14}
-.ttitle{flex:1;text-align:center;color:#28280e;font-size:10px;letter-spacing:.05em;}
-.tbody{padding:16px 20px 22px;min-height:130px;display:flex;flex-direction:column;gap:3px;}
-.tline{opacity:0;transform:translateY(2px);transition:opacity .14s,transform .14s;display:flex;gap:8px;white-space:nowrap;}
-.tline.on{opacity:1;transform:none;}
-.tp{color:#3a3a2e}.tc{color:#c8c8b0}.to{color:#504840}.th{color:#686050}
-.tcur{display:inline-block;width:6px;height:13px;background:#484030;vertical-align:middle;animation:bl 1s steps(1) infinite;}
-@keyframes bl{50%{opacity:0}}
-#lbar-wrap{width:min(460px,88vw);display:flex;flex-direction:column;gap:6px;}
-#lbar-track{height:1px;background:#1a1a10;overflow:hidden;}
-#lbar-fill{height:100%;width:0;background:var(--coral);transition:width .06s linear;}
-#lpct{font-family:var(--mono);font-size:10px;color:#2a2a18;text-align:right;}
-
 /* site */
-#site{opacity:0;transition:opacity .8s ease;}
-#site.on{opacity:1;}
+#site{opacity:1;}
 
 /* nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:600;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;transition:background .35s,border-color .35s;border-bottom:1px solid transparent;}
@@ -251,8 +231,13 @@ nav.scrolled{background:rgba(240,236,227,.92);backdrop-filter:blur(20px);border-
 .fsel:focus{border-color:var(--muted);}
 .fsel option{background:var(--cream);}
 textarea.fi{resize:none;min-height:90px;line-height:1.65;}
-.fbtn{align-self:flex-start;font-family:var(--mono);font-size:11px;color:var(--coral);border:1px solid var(--coral);padding:10px 22px;background:none;cursor:none;letter-spacing:.08em;transition:background .2s,color .2s;}
+.fbtn{align-self:flex-start;font-family:var(--mono);font-size:11px;color:var(--coral);border:1px solid var(--coral);padding:10px 22px;background:none;cursor:none;letter-spacing:.08em;transition:background .2s,color .2s,opacity .2s;}
 .fbtn:hover{background:var(--coral);color:var(--cream);}
+.fbtn:disabled{opacity:.45;cursor:not-allowed;}
+.form-footer{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.form-status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;opacity:0;transition:opacity .3s;}
+.form-status.ok{color:#4a7c59;opacity:1;}
+.form-status.err{color:var(--coral);opacity:1;}
 
 footer{border-top:1px solid var(--rule);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;}
 footer p{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.04em;}
@@ -285,21 +270,6 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacin
   <div class="t-name" id="tip-name"></div>
   <div class="t-desc" id="tip-desc"></div>
   <a id="tip-cta" class="t-cta" href="#" target="_blank" rel="noopener noreferrer">View Project &nbsp;↗</a>
-</div>
-
-<!-- LOADER -->
-<div id="loader">
-  <div class="tbox">
-    <div class="tbar">
-      <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
-      <span class="ttitle">presence — terminal</span>
-    </div>
-    <div class="tbody" id="tbody"></div>
-  </div>
-  <div id="lbar-wrap">
-    <div id="lbar-track"><div id="lbar-fill"></div></div>
-    <div id="lpct">0%</div>
-  </div>
 </div>
 
 <div id="site">
@@ -415,9 +385,9 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacin
 <div class="section" id="pricing">
   <div class="sec-label sr">pricing</div>
   <div class="price-grid sr">
-    <div class="plan"><div class="pl">starter</div><div class="plan-price"><sup>$</sup>200</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Single-page site</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Basic SEO setup</li><li class="pf">2 revision rounds</li><li class="pf">E-commerce</li><li class="pf">Quick support included with maintenance fee</li><li class="pf">Support retainer</li></ul><a href="#contact" class="pbtn">get started</a></div>
-    <div class="plan feat"><div class="pl">growth &nbsp;·&nbsp; most popular</div><div class="plan-price"><sup>$</sup>350</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Up to 8-page site</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Advanced SEO</li><li class="pf">Unlimited revisions</li><li class="pf">Google Analytics</li><li class="pf">Quick support included with maintenance fee</li><li class="pf off">E-commerce store</li></ul><a href="#contact" class="pbtn">get started</a></div>
-    <div class="plan"><div class="pl">e-commerce</div><div class="plan-price"><sup>$</sup>500</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Full online store</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Inventory management</li><li class="pf">Email integrations</li><li class="pf">Performance tuned</li><li class="pf">Quick support included with maintenance fee</li><li class="pf">Growth retainer available</li></ul><a href="#contact" class="pbtn">get started</a></div>
+    <div class="plan"><div class="pl">starter</div><div class="plan-price"><sup>$</sup>200</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Single-page site</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Basic SEO setup</li><li class="pf">2 revision rounds</li><li class="pf">E-commerce</li><li class="pf">Quick support included with maintenance fee</li></ul><a href="#contact" class="pbtn">get started</a></div>
+    <div class="plan feat"><div class="pl">growth &nbsp;·&nbsp; most popular</div><div class="plan-price"><sup>$</sup>350</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Up to 8-page site</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Advanced SEO</li><li class="pf">Unlimited revisions</li><li class="pf">Google Analytics</li><li class="pf">Quick support included with maintenance fee</li></ul><a href="#contact" class="pbtn">get started</a></div>
+    <div class="plan"><div class="pl">e-commerce</div><div class="plan-price"><sup>$</sup>500</div><div class="per">one-time and $20 per month for a maintenance fee.</div><div class="pdiv"></div><ul class="pfs"><li class="pf">Full online store</li><li class="pf">Free Domain included in your purchase</li><li class="pf">Hosting Included in your purchase</li><li class="pf">Inventory management</li><li class="pf">Email integrations</li><li class="pf">Performance tuned</li><li class="pf">Quick support included with maintenance fee</li></ul><a href="#contact" class="pbtn">get started</a></div>
   </div>
 </div>
 
@@ -441,25 +411,67 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacin
     <div class="sr">
       <p class="con-lede">Houston-based, working nationwide. Get back to you within <strong>one business day.</strong></p>
       <div class="c-links">
-        <div class="c-row"><div><div class="c-name">hello@presencehtx.com</div><div class="c-sub">email us directly</div></div></div>
+        <div class="c-row"><div><div class="c-name">presencehtx@gmail.com</div><div class="c-sub">email us directly</div></div></div>
         <div class="c-row"><div><div class="c-name">Houston, TX</div><div class="c-sub">serving clients nationwide</div></div></div>
         <a href="#" class="c-row"><span class="c-name">Instagram</span><span class="c-arr">↗</span></a>
         <a href="#" class="c-row"><span class="c-name">LinkedIn</span><span class="c-arr">↗</span></a>
       </div>
     </div>
     <div class="sr">
-      <div class="form">
-        <div class="fr"><div class="fg"><label class="fl">name</label><input type="text" class="fi" placeholder="Your name"></div><div class="fg"><label class="fl">email</label><input type="email" class="fi" placeholder="you@company.com"></div></div>
-        <div class="fg"><label class="fl">business name</label><input type="text" class="fi" placeholder="Your brand or company"></div>
-        <div class="fg"><label class="fl">project type</label><select class="fsel"><option value="">select...</option><option>Business Website</option><option>E-commerce Store</option><option>Landing Page</option><option>Brand Identity</option><option>Redesign / Refresh</option><option>Something Else</option></select></div>
-        <div class="fg"><label class="fl">tell us about your project</label><textarea class="fi" placeholder="What are you building, who's it for, what does winning look like?"></textarea></div>
-        <button class="fbtn">send message</button>
-      </div>
+      <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+
+        <!-- Web3Forms access key -->
+        <input type="hidden" name="access_key" value="a23f10b4-ef9c-4661-8435-776d6d6289c2">
+        <!-- Custom email subject line -->
+        <input type="hidden" name="subject" value="New Project Inquiry — Presence HTX">
+        <!-- Redirect back to same page after submit (we intercept with JS instead) -->
+        <input type="hidden" name="redirect" value="false">
+        <!-- Honeypot spam trap — bots fill this, humans don't -->
+        <input type="checkbox" name="botcheck" style="display:none">
+
+        <div class="fr">
+          <div class="fg">
+            <label class="fl">name</label>
+            <input type="text" name="name" class="fi" placeholder="Your name" required>
+          </div>
+          <div class="fg">
+            <label class="fl">email</label>
+            <input type="email" name="email" class="fi" placeholder="you@company.com" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">business name</label>
+          <input type="text" name="business" class="fi" placeholder="Your brand or company">
+        </div>
+        <div class="fg">
+          <label class="fl">project type</label>
+          <select name="project_type" class="fsel">
+            <option value="">select...</option>
+            <option>Business Website</option>
+            <option>E-commerce Store</option>
+            <option>Landing Page</option>
+            <option>Brand Identity</option>
+            <option>Redesign / Refresh</option>
+            <option>Something Else</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">tell us about your project</label>
+          <textarea name="message" class="fi" placeholder="What are you building, who's it for, what does winning look like?" required></textarea>
+        </div>
+
+        <!-- Submit button + status messages -->
+        <div class="form-footer">
+          <button type="submit" class="fbtn" id="form-submit">send message</button>
+          <span class="form-status" id="form-status"></span>
+        </div>
+
+      </form>
     </div>
   </div>
 </div>
 
-<footer><p>© 2025 Presence</p><p><span class="fc">presencehtx.com</span> &nbsp;·&nbsp; Houston, TX</p></footer>
+<footer><p>© 2026 Presence</p><p><span class="fc">presencehtx.com</span> &nbsp;·&nbsp; Houston, TX</p></footer>
 </div><!-- /site -->
 
 <script>
@@ -472,35 +484,6 @@ document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('lnk'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('lnk'));
 });
-
-/* ── loader ── */
-const LINES=[
-  {cmd:true,text:'ssh presence@presencehtx.com'},
-  {cmd:false,cls:'th',text:'Connected to presencehtx.com'},
-  {cmd:true,text:'ls ./clients/'},
-  {cmd:false,cls:'to',text:'lone-star/&nbsp;&nbsp;lumiere/&nbsp;&nbsp;gulf-coast/&nbsp;&nbsp;habibi/'},
-  {cmd:true,text:'cat services.json'},
-  {cmd:false,cls:'tc',text:'{ "craft": true, "templates": false }'},
-  {cmd:true,text:'./deploy --env=production'},
-  {cmd:false,cls:'th',text:'✓ presence is live — presencehtx.com'},
-];
-const GAPS=[0,300,580,900,1240,1540,1940,2360],TOTAL=3200;
-const tbody=document.getElementById('tbody');
-const lbfill=document.getElementById('lbar-fill'),lbpct=document.getElementById('lpct');
-const loader=document.getElementById('loader'),site=document.getElementById('site');
-let t0=null;
-(function pb(ts){if(!t0)t0=ts;const p=Math.min(100,Math.round(((ts-t0)/TOTAL)*100));lbfill.style.width=p+'%';lbpct.textContent=p+'%';if(p<100)requestAnimationFrame(pb);})();
-LINES.forEach((l,i)=>{
-  setTimeout(()=>{
-    const row=document.createElement('div');row.className='tline';
-    if(l.cmd)row.innerHTML=`<span class="tp">presence</span><span class="th">@</span><span class="tc">htx</span><span class="to">:</span><span class="tc">~</span><span class="to">$</span><span class="th"> ${l.text}</span>`;
-    else row.innerHTML=`<span class="${l.cls||'th'}">${l.text}</span>`;
-    tbody.appendChild(row);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>row.classList.add('on')));
-    if(i===LINES.length-1){setTimeout(()=>{const c=document.createElement('div');c.className='tline on';c.innerHTML=`<span class="tp">presence</span><span class="th">@</span><span class="tc">htx</span><span class="to">:</span><span class="tc">~</span><span class="to">$</span><span class="tc"> <span class="tcur"></span></span>`;tbody.appendChild(c);},200);}
-  },GAPS[i]);
-});
-setTimeout(()=>{loader.classList.add('out');setTimeout(()=>loader.style.display='none',950);site.classList.add('on');},TOTAL+400);
 
 /* ── nav + reveal ── */
 const nav=document.getElementById('nav');
@@ -1044,6 +1027,54 @@ function easeIO(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
     sl3.style.color=`rgba(14,13,11,${a3*.55})`;sl3.style.transform=`translateX(${lerp(22,0,a3)}px)`;
     renderer.render(scene,cam);
   })();
+})();
+
+/* ── Web3Forms contact form ── */
+(function(){
+  const form = document.getElementById('contact-form');
+  if(!form) return;
+  const btn    = document.getElementById('form-submit');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    // Basic client-side validation
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    // Loading state
+    btn.disabled = true;
+    btn.textContent = 'sending...';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    try {
+      const data = new FormData(form);
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+      });
+      const json = await res.json();
+
+      if(json.success){
+        status.textContent = '✓ message sent — we\'ll be in touch soon.';
+        status.className   = 'form-status ok';
+        form.reset();
+        btn.textContent = 'send message';
+        btn.disabled    = false;
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch(err){
+      status.textContent = '✗ something went wrong — try emailing us directly.';
+      status.className   = 'form-status err';
+      btn.textContent = 'send message';
+      btn.disabled    = false;
+    }
+  });
 })();
 </script>
 </body>
